@@ -4,9 +4,9 @@ import numpy as np
 import altair as alt
 from statsmodels.tsa.seasonal import STL
 
-st.set_page_config(page_title="City Peer Comparison Dashboard", layout="wide")
-st.title("City Peer Comparison Dashboard")
-st.write(f"A peer group comparison dashboard for climate-initiatives of cities")
+st.set_page_config(page_title="Twin City Climate Compass", layout="wide")
+st.title("Twin City Climate Compass")
+st.write(f"A peer group comparison dashboard for climate initiatives of cities")
 
 # Real-world cities — U.S. and Europe
 all_cities = ["New York City", "Los Angeles", "Chicago", "London", "Paris", "Berlin", "Madrid"]
