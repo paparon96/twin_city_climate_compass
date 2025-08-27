@@ -913,12 +913,13 @@ packages:
 - pypi: ./
   name: twin-city-climate-compass
   version: 0.1.0
-  sha256: a0ca055daf352be3ad68df2a79c13d5d84bc790d15ddf81f0cdec962f0f9288e
+  sha256: 2372eabb96ba819dc908605db4af2ed62c94244b9793e1588e27693634986fd4
   requires_dist:
   - streamlit
   - pandas
   - numpy
   - altair
+  - statsmodels
   requires_python: '>=3.11'
   editable: true
 - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
