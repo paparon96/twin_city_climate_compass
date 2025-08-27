@@ -19,12 +19,15 @@ Activate the `pixi` env:
 pixi shell
 ```
 
-# Run the dashboard
+# Run the dashboard locally
 
-Run the streamlit application:
+Run the streamlit application (from the pixi shell):
 ```
 streamlit run app.py
 ```
+
+# Access the public dashboard on the web
+The dashboard is also available at: https://twin-city-climate-compass.streamlit.app/
 
 
 
