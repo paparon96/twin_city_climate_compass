@@ -168,7 +168,7 @@ if st.button(f"Analyze {leader}'s Best Practices"):
     st.write("🤖 AI Assistant Analysis:")
     
     # Mock loading state
-    with st.spinner(f"Searching and analyzing sustainability practices in {leader}..."):
+    with st.spinner(f"Searching and analyzing sustainability best practices in {leader}..."):
         import time
         time.sleep(3)
     
