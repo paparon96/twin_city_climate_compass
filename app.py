@@ -25,6 +25,15 @@ use_synthetic = st.sidebar.checkbox("Include Synthetic Control (average of peers
 n_months = 36
 dates = pd.date_range(end=pd.Timestamp.today(), periods=n_months, freq="M")
 
+# Add climate action date picker
+climate_action_date = st.sidebar.date_input(
+    "Select climate action start date",
+    value=dates[len(dates)//2].date(),
+    min_value=dates.min(),
+    max_value=dates.max()
+)
+
+
 def generate_city_data(city):
     np.random.seed(abs(hash(city)) % (2**32))
     air_pollution = np.cumsum(np.random.randn(n_months) * 2 + 1) + 50
@@ -75,6 +84,13 @@ for city in all_data['city'].unique():
     anomalies = pd.concat([anomalies, df_city[df_city['anomaly']]], ignore_index=True)
 all_data = all_data.merge(anomalies[['city','date','anomaly']], on=['city','date'], how='left').fillna({'anomaly': False})
 
+# Create vertical line data
+vline_data = pd.DataFrame({
+    'date': [pd.Timestamp(climate_action_date)],
+    'y': [0],
+    'y2': [all_data[metric].max()]
+})
+
 # Charting with Altair
 chart = alt.Chart(all_data).mark_line().encode(
     x="date:T",
@@ -92,7 +108,19 @@ anomaly_points = alt.Chart(all_data[all_data['anomaly']]).mark_circle(size=100, 
     x="date:T", y=alt.Y(f"{metric}:Q"), tooltip=["city","date", f"{metric}:Q"]
 )
 
-st.altair_chart((chart + trend_line + anomaly_points).interactive(), use_container_width=True)
+# Add vertical line
+vline = alt.Chart(vline_data).mark_rule(
+    strokeDash=[2, 2],
+    color='gray',
+    strokeWidth=2
+).encode(
+    x='date:T',
+    y='y:Q',
+    y2='y2:Q',
+    tooltip=[alt.Tooltip('date:T', title=f'Climate Action Start ({base_city})')]
+)
+
+st.altair_chart((chart + trend_line + anomaly_points + vline).interactive(), use_container_width=True)
 
 # Latest values comparison
 latest = (
